@@ -14,7 +14,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nyaruka/phonenumbers"
+	"github.com/ghostmonitor/phonenumbers"
 	"golang.org/x/exp/maps"
 	"google.golang.org/protobuf/proto"
 )
@@ -42,7 +42,12 @@ func buildMetadata() error {
 
 	fmt.Print("OK\nBuilding short number metadata...")
 
-	_, err = buildNumberMetadata("resources/ShortNumberMetadata.xml", "ShortNumberData", "shortnumber_metadata_bin.go", true)
+	_, err = buildNumberMetadata(
+		"resources/ShortNumberMetadata.xml",
+		"ShortNumberData",
+		"shortnumber_metadata_bin.go",
+		true,
+	)
 	if err != nil {
 		return err
 	}
@@ -55,7 +60,11 @@ func buildMetadata() error {
 
 	fmt.Print("OK\nBuilding timezone metadata...")
 
-	if err := buildTimezoneMetadata("resources/timezones/map_data.txt", "TimezoneData", "prefix_to_timezone_bin.go"); err != nil {
+	if err := buildTimezoneMetadata(
+		"resources/timezones/map_data.txt",
+		"TimezoneData",
+		"prefix_to_timezone_bin.go",
+	); err != nil {
 		return err
 	}
 

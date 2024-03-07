@@ -6,7 +6,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/nyaruka/phonenumbers"
+	"github.com/ghostmonitor/phonenumbers"
 )
 
 var Version = "dev"
@@ -58,15 +58,17 @@ func parse(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespons
 		return writeResponse(http.StatusBadRequest, errorResponse{"error parsing phone", err.Error()})
 	}
 
-	return writeResponse(http.StatusOK, successResponse{
-		NationalNumber:         *metadata.NationalNumber,
-		CountryCode:            *metadata.CountryCode,
-		IsPossible:             phonenumbers.IsPossibleNumber(metadata),
-		IsValid:                phonenumbers.IsValidNumber(metadata),
-		NationalFormatted:      phonenumbers.Format(metadata, phonenumbers.NATIONAL),
-		InternationalFormatted: phonenumbers.Format(metadata, phonenumbers.INTERNATIONAL),
-		Version:                Version,
-	})
+	return writeResponse(
+		http.StatusOK, successResponse{
+			NationalNumber:         *metadata.NationalNumber,
+			CountryCode:            *metadata.CountryCode,
+			IsPossible:             phonenumbers.IsPossibleNumber(metadata),
+			IsValid:                phonenumbers.IsValidNumber(metadata),
+			NationalFormatted:      phonenumbers.Format(metadata, phonenumbers.NATIONAL),
+			InternationalFormatted: phonenumbers.Format(metadata, phonenumbers.INTERNATIONAL),
+			Version:                Version,
+		},
+	)
 }
 
 func main() {

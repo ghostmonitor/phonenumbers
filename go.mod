@@ -1,4 +1,4 @@
-module github.com/nyaruka/phonenumbers
+module github.com/ghostmonitor/phonenumbers
 
 go 1.19
 

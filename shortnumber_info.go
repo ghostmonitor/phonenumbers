@@ -1,7 +1,7 @@
 package phonenumbers
 
 import (
-	"github.com/nyaruka/phonenumbers/gen"
+	"github.com/ghostmonitor/phonenumbers/gen"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -152,7 +152,10 @@ func getRegionCodeForShortNumberFromRegionList(number *PhoneNumber, regionCodes 
 	nationalNumber := GetNationalSignificantNumber(number)
 	for _, regionCode := range regionCodes {
 		phoneMetadata := getShortNumberMetadataForRegion(regionCode)
-		if phoneMetadata != nil && matchesPossibleNumberAndNationalNumber(nationalNumber, phoneMetadata.GetShortCode()) {
+		if phoneMetadata != nil && matchesPossibleNumberAndNationalNumber(
+			nationalNumber,
+			phoneMetadata.GetShortCode(),
+		) {
 			// The number is valid for this region.
 			return regionCode
 		}
